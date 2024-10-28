@@ -19,6 +19,20 @@ class Item(Resource):
         items[name] = item
         return item, 201
 
+    def put(self, name):
+        data = request.get_json()
+        if name in items:
+            item = {"name": name, "price": data["price"]}
+            items[name] = item
+            return item, 200
+        return {"message": "Item not found"}, 404
+
+    def delete(self, name):
+        if name in items:
+            del items[name]
+            return {"message": "Item deleted"}, 200
+        return {"message": "Item not found"}, 404
+
 # Додаємо ресурс до API
 api.add_resource(Item, '/item/<string:name>')
 
