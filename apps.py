@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
+from flask_cors import CORS  # Імпортуємо CORS
 
 app = Flask(__name__)
+CORS(app)  # Додаємо підтримку CORS
 api = Api(app)
 
 items = {}  # Словник для зберігання елементів
